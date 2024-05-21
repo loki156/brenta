@@ -270,6 +270,20 @@ function mytheme_widgets_init() {
 }
 add_action('widgets_init', 'mytheme_widgets_init');
 
+function mytheme_register_footer_widgets() {
+    for ($i = 1; $i <= 6; $i++) {
+        register_sidebar(array(
+            'name'          => "Footer Widget Area $i",
+            'id'            => "footer-widget-$i",
+            'before_widget' => '<div class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h4 class="widget-title">',
+            'after_title'   => '</h4>',
+        ));
+    }
+}
+add_action('widgets_init', 'mytheme_register_footer_widgets');
+
 function mytheme_customize_register($wp_customize) { 
     
     // Add Panel for Template Settings
@@ -649,7 +663,87 @@ $wp_customize->add_section('global_settings', array(
     'panel'    => 'template_settings_panel',
     'priority' => 10,
 ));
+ // Add Footer Settings section
+ $wp_customize->add_section('footer_settings', array(
+    'title'    => __('Footer Settings', 'mytheme'),
+    'panel'    => 'template_settings_panel',
+    'priority' => 160,
+));
 
+// Add setting for Footer Columns
+$wp_customize->add_setting('footer_columns', array(
+    'default'           => '1',
+    'sanitize_callback' => 'absint',
+    'transport'         => 'refresh',
+));
+
+// Add control for Footer Columns
+$wp_customize->add_control('footer_columns', array(
+    'type'    => 'select',
+    'label'   => __('Display Columns', 'mytheme'),
+    'section' => 'footer_settings',
+    'choices' => array(
+        '1' => '1',
+        '2' => '2',
+        '3' => '3',
+        '4' => '4',
+        '5' => '5',
+        '6' => '6',
+    ),
+));
+
+// Add setting for Advanced Settings toggle
+$wp_customize->add_setting('footer_advanced_settings', array(
+    'default'           => false,
+    'transport'         => 'refresh',
+    'sanitize_callback' => 'wp_validate_boolean',
+));
+
+// Add control for Advanced Settings toggle
+$wp_customize->add_control(new WP_Customize_Control(
+    $wp_customize,
+    'footer_advanced_settings',
+    array(
+        'label'       => __('Advanced Settings', 'mytheme'),
+        'section'     => 'footer_settings',
+        'settings'    => 'footer_advanced_settings',
+        'type'        => 'checkbox',
+        
+    )
+));
+
+$footer_columns = get_theme_mod('footer_columns', '1');
+for ($i = 1; $i <= 6; $i++) {
+    $wp_customize->add_setting("footer_widget_area_col_$i", array(
+        'default'           => 'col-' . (12 / $footer_columns),
+        'transport'         => 'refresh',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control("footer_widget_area_col_$i", array(
+        'label'       => __("Footer Widget Area $i", 'mytheme'),
+        'section'     => 'footer_settings',
+        'settings'    => "footer_widget_area_col_$i",
+        'type'        => 'select',
+        'choices'     => array(
+            'col-1' => 'col-1',
+            'col-2' => 'col-2',
+            'col-3' => 'col-3',
+            'col-4' => 'col-4',
+            'col-5' => 'col-5',
+            'col-6' => 'col-6',
+            'col-7' => 'col-7',
+            'col-8' => 'col-8',
+            'col-9' => 'col-9',
+            'col-10' => 'col-10',
+            'col-11' => 'col-11',
+            'col-12' => 'col-12',
+        ),
+        'active_callback' => function() {
+            return get_theme_mod('footer_advanced_settings', false);
+        }
+    ));
+}
 }
 add_action('customize_register', 'mytheme_customize_register');
 
