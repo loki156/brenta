@@ -11,22 +11,24 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'brenta' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'brenta' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'brenta' ), 'brenta', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+	<div class="hs-footer">
+    <div class="inner is--flex">
+        
+             <?php
+            $footer_columns = get_theme_mod('footer_columns', '1');
+            $advanced_settings = get_theme_mod('footer_advanced_settings', false);
+            for ($i = 1; $i <= $footer_columns; $i++) {
+                $col_class = $advanced_settings ? get_theme_mod("footer_widget_area_col_$i", 'col-' . (12 / $footer_columns)) : 'col-' . (12 / $footer_columns);
+                if (is_active_sidebar("footer-widget-$i")) {
+                    echo "<div class='$col_class'>";
+                    dynamic_sidebar("footer-widget-$i");
+                    echo '</div>';
+                }
+            }
+            ?>
+        
+    </div><!-- end inner -->
+</div><!-- end footer -->
 
 <?php wp_footer(); ?>
 
