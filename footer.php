@@ -53,6 +53,7 @@ $main_footer_bottom_padding = get_theme_mod('main_footer_bottom_padding', '20');
             </div><!-- end gutter -->
         </div><!-- end inner -->
     </div><!-- end footer btm -->
+		</div><!-- end footer -->
 
 <?php wp_footer(); ?>
 
