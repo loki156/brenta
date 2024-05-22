@@ -284,7 +284,92 @@ function mytheme_register_footer_widgets() {
 }
 add_action('widgets_init', 'mytheme_register_footer_widgets');
 
+function mytheme_register_footer_bottom_widget() {
+    register_sidebar(array(
+        'name'          => 'Footer Bottom Widget',
+        'id'            => 'footer-bottom-widget',
+        'before_widget' => '<div class="footer-bottom-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ));
+}
+add_action('widgets_init', 'mytheme_register_footer_bottom_widget');
+
+function mytheme_register_footer_top_widget() {
+    register_sidebar(array(
+        'name'          => 'Footer Top Widget',
+        'id'            => 'footer-top-widget',
+        'before_widget' => '<div class="footer-top-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ));
+}
+add_action('widgets_init', 'mytheme_register_footer_top_widget');
+
 function mytheme_customize_register($wp_customize) { 
+    // Add setting for Display Top Footer Widget toggle
+$wp_customize->add_setting('display_top_footer_widget', array(
+    'default'           => true,
+    'transport'         => 'refresh',
+    'sanitize_callback' => 'wp_validate_boolean',
+));
+	
+	// Add a pseudo-control for the title "Top Footer"
+    $wp_customize->add_control(new WP_Customize_Control(
+        $wp_customize,
+        'top_footer_title_control',
+        array(
+            'label'    => __('Top Footer', 'mytheme'), // This will act as a title
+            'section'  => 'footer_settings', // Ensure this is the correct section
+            'settings' => 'display_top_footer_widget', // Reuse the setting to avoid creating a new one
+            'type'     => 'hidden', // Use hidden type to create spacing and grouping effect
+            'priority' => 10, // Adjust priority to control the order within the section
+        )
+    ));
+
+// Add control for Display Top Footer Widget toggle
+$wp_customize->add_control('display_top_footer_widget', array(
+    'type'        => 'checkbox',
+    'label'       => __('Display Top Footer Widget', 'mytheme'),
+    'section'     => 'footer_settings',
+    'settings'    => 'display_top_footer_widget',
+));
+	
+	 // Main Footer Top Padding
+    $wp_customize->add_setting('main_footer_top_padding', array(
+        'default' => 20,
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('main_footer_top_padding', array(
+        'type' => 'range',
+        'section' => 'footer_settings',
+        'label' => __('Main Footer Top Padding', 'mytheme'),
+        'input_attrs' => array(
+            'min' => 0,
+            'max' => 100,
+            'step' => 1,
+        ),
+    ));
+
+    // Main Footer Bottom Padding
+    $wp_customize->add_setting('main_footer_bottom_padding', array(
+        'default' => 20,
+        'transport' => 'postMessage',
+    ));
+
+    $wp_customize->add_control('main_footer_bottom_padding', array(
+        'type' => 'range',
+        'section' => 'footer_settings',
+        'label' => __('Main Footer Bottom Padding', 'mytheme'),
+        'input_attrs' => array(
+            'min' => 0,
+            'max' => 100,
+            'step' => 1,
+        ),
+    ));
     
     // Add Panel for Template Settings
     $wp_customize->add_panel('template_settings_panel', array(
@@ -682,6 +767,7 @@ $wp_customize->add_control('footer_columns', array(
     'type'    => 'select',
     'label'   => __('Display Columns', 'mytheme'),
     'section' => 'footer_settings',
+	'description' => 'Display columns in the main footer section',
     'choices' => array(
         '1' => '1',
         '2' => '2',
