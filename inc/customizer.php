@@ -31,6 +31,9 @@ function brenta_customize_register( $wp_customize ) {
 			)
 		);
 	}
+
+    
+	
 }
 add_action( 'customize_register', 'brenta_customize_register' );
 
