@@ -35,5 +35,29 @@ jQuery(document).ready(function($) {
             $('.hs-footer .gutter').css('padding-bottom', newval + 'px');
         });
     });
-});
 
+    // Function to toggle visibility based on other control's value
+    function toggleControlVisibility(settingId, controlId) {
+        var setting = wp.customize(settingId),
+            control = wp.customize.control(controlId);
+
+        function updateVisibility() {
+            control.container.toggle(setting.get());
+        }
+
+        // Set initial visibility
+        updateVisibility();
+
+        // Update visibility on change
+        setting.bind(function(newVal) {
+            updateVisibility();
+        });
+    }
+
+    // Toggle visibility for Top Header options
+    toggleControlVisibility('top_header_display', 'top_header_visibility_control');
+    toggleControlVisibility('top_header_display', 'top_header_alignment_control');
+
+    // Toggle visibility for Header Widget options
+    toggleControlVisibility('header_widget_display', 'header_widget_visibility_control');
+});
