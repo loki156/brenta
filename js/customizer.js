@@ -25,14 +25,14 @@ jQuery(document).ready(function($) {
     // Main Footer Top Padding
     wp.customize('main_footer_top_padding', function(value) {
         value.bind(function(newval) {
-            $('.hs-footer .gutter').css('padding-top', newval + 'px');
+            $('.main-gutter').css('padding-top', newval + 'px');
         });
     });
 
     // Main Footer Bottom Padding
     wp.customize('main_footer_bottom_padding', function(value) {
         value.bind(function(newval) {
-            $('.hs-footer .gutter').css('padding-bottom', newval + 'px');
+            $('.main-gutter').css('padding-bottom', newval + 'px');
         });
     });
 
