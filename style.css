@@ -1,16 +1,16 @@
 /*!
 Theme Name: Brenta
 Theme URI: https://www.matrix-themes.com/
-Author: Serhiy Hembarevskyy
+Author: Matrix Themes
 Author URI: https://www.matrix-themes.com/about
 Description: Wordpress multipurpose theme based on Matrix themes
-Version: 1.0.3
+Version: 1.0.6
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: brenta
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+Tags: custom body classes, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned.
@@ -974,7 +974,7 @@ textarea {
 
 
 /* -------------------------------------------------------------------------------- /
-    THEME NAME: Matrix 01
+    THEME NAME: Brenta
     VERSION: 1.2  (26-03-2024)
     DESCRIPTION: Responsive Jimdo theme with dropdown menu
     AUTHOR: Serhiy Hembarevskyy
@@ -1083,7 +1083,33 @@ body .has-custom-text, .has-custom-text p, .has-custom-text table, .has-custom-t
      width:100%!important;
 }
 
+.hs-footer .gutter.is--flex {
+   align-items: baseline;
+   column-gap:30px;
+}
+
 /*** end template tweaks ***/
+
+/**
+ * Header & Footer Customizer styles.
+ */
+
+
+.customize-partial-edit-shortcuts-shown .customize-partial-edit-shortcut button {
+	width: 26px;
+	height: 26px;
+	min-width: 26px;
+	min-height: 26px;
+	border-width: 1px;
+	border-radius: 2px;
+	box-shadow: none;
+	text-shadow: none;
+}
+
+.theme-brenta .customize-partial-edit-shortcut.customize-partial-edit-shortcut-custom_logo .customize-partial-edit-shortcut-button {
+	top:0;
+	left:0;
+}
 
 /*** template styles ***/
 .body {
@@ -1094,13 +1120,9 @@ body .has-custom-text, .has-custom-text p, .has-custom-text table, .has-custom-t
    overflow: hidden;
 }
 
-#hs-container {
-   width: 100%;
-   padding: 0;
-}
-
 .inner {
-   width: 980px;
+   width: 1140px;
+   max-width:100%;
    margin: 0 auto;
    position: relative;
 }
@@ -1114,8 +1136,6 @@ body .has-custom-text, .has-custom-text p, .has-custom-text table, .has-custom-t
 
 .hs-top-header {
    width: 100%;
-   z-index: 203002;
-   min-height: 33px;
    position: relative;
 }
 
@@ -1124,11 +1144,10 @@ body .has-custom-text, .has-custom-text p, .has-custom-text table, .has-custom-t
 }
 
 .hs-header {
- 
    position: relative;
    width: 100%;
    padding: 0;
-   z-index: 203002;
+   margin:0;
 }
 
 .fixed,
@@ -1186,19 +1205,15 @@ body .has-custom-text, .has-custom-text p, .has-custom-text table, .has-custom-t
    background: #fff;
 }
 
-.cc-pagemode-overlay .hs-content {
-   padding: 20px 0;
-}
-
 .hs-footer {
    width: 100%;
    background: #111;
+   color:#fff;
    float: left;
 }
 
 .footer-btm {
    float: left;
-   background: #111;
    width: 100%;
 }
 
@@ -1239,9 +1254,7 @@ body .has-custom-text, .has-custom-text p, .has-custom-text table, .has-custom-t
 
 /* mobile menu */
 .button_container {
-   position: fixed;
-   top: 10px;
-   right: 10px;
+   position: relative;
    height: 26px;
    width: 30px;
    display: block;
