@@ -27,7 +27,7 @@ $main_footer_bottom_padding = get_theme_mod('main_footer_bottom_padding', '20');
         </div><!-- end footer top -->
     <?php endif; ?>
 		 <div class="inner">
-        <div class="gutter is--flex" style="padding-top: <?php echo esc_attr($main_footer_top_padding); ?>px; padding-bottom: <?php echo esc_attr($main_footer_bottom_padding); ?>px;">
+        <div class="main-gutter is--flex" style="padding-top: <?php echo esc_attr($main_footer_top_padding); ?>px; padding-bottom: <?php echo esc_attr($main_footer_bottom_padding); ?>px;">
             <?php
             $footer_columns = get_theme_mod('footer_columns', '1');
             $advanced_settings = get_theme_mod('footer_advanced_settings', false);
@@ -41,7 +41,7 @@ $main_footer_bottom_padding = get_theme_mod('main_footer_bottom_padding', '20');
             }
 			
             ?>
-        </div><!-- end gutter -->
+        </div><!-- end main gutter -->
     </div><!-- end inner -->
 
     <div class="footer-btm">
