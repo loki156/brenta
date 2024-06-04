@@ -20,7 +20,13 @@ jQuery(document).ready(function($) {
             $('.width-value').text(newVal + 'px'); // Update the label text dynamically
             $('.custom-logo').css('width', newVal + 'px'); // Also update the actual logo width
         });
+
+        // Set the initial value of the range slider
+        var initialValue = value.get();
+        $('.width-value').text(initialValue + 'px');
     });
+
+
 
     // Main Footer Top Padding
     wp.customize('main_footer_top_padding', function(value) {
@@ -53,10 +59,14 @@ jQuery(document).ready(function($) {
             updateVisibility();
         });
     }
-
+	
     // Toggle visibility for Top Header options
     toggleControlVisibility('top_header_display', 'top_header_visibility_control');
     toggleControlVisibility('top_header_display', 'top_header_alignment_control');
+	
+	// Toggle visibility for site title and tagline based on the setting
+ toggleControlVisibility('display_site_title_tagline', '.site-identity');
+
 
     // Toggle visibility for Header Widget options
     toggleControlVisibility('header_widget_display', 'header_widget_visibility_control');
