@@ -41,16 +41,31 @@ function brenta_customize_register( $wp_customize ) {
 
 	// Add control for logo width
 	$wp_customize->add_control('logo_width_control', array(
-		'label' => __('Logo Width', 'your-theme'),
+		'label' => __('Logo Width', 'brenta'),
 		'section' => 'title_tagline', // Ensure this is the correct section where you want the control
 		'settings' => 'logo_width',
 		'type'     => 'range',
 		'input_attrs' => array(
 			'min' => 50,
-			'max' => 300,
+			'max' => 500,
 			'step' => 1,
 		),
 	));
+	
+	// Add setting for displaying site title and tagline
+$wp_customize->add_setting('display_site_title_tagline', array(
+    'default' => false,
+    'transport' => 'refresh',
+));
+
+// Add control for displaying site title and tagline
+$wp_customize->add_control('display_site_title_tagline_control', array(
+    'label' => __('Display Site Title and Tagline', 'brenta'),
+    'section' => 'title_tagline', // Adjust the section as needed
+    'settings' => 'display_site_title_tagline',
+    'type' => 'checkbox',
+));
+	
     // Add setting for Display Top Footer Widget toggle
 $wp_customize->add_setting('display_top_footer_widget', array(
     'default'           => true,
@@ -63,7 +78,7 @@ $wp_customize->add_setting('display_top_footer_widget', array(
         $wp_customize,
         'top_footer_title_control',
         array(
-            'label'    => __('Top Footer', 'mytheme'), // This will act as a title
+            'label'    => __('Top Footer', 'brenta'), // This will act as a title
             'section'  => 'footer_settings', // Ensure this is the correct section
             'settings' => 'display_top_footer_widget', // Reuse the setting to avoid creating a new one
             'type'     => 'hidden', // Use hidden type to create spacing and grouping effect
@@ -74,7 +89,7 @@ $wp_customize->add_setting('display_top_footer_widget', array(
 // Add control for Display Top Footer Widget toggle
 $wp_customize->add_control('display_top_footer_widget', array(
     'type'        => 'checkbox',
-    'label'       => __('Display Top Footer Widget', 'mytheme'),
+    'label'       => __('Display Top Footer Widget', 'brenta'),
     'section'     => 'footer_settings',
     'settings'    => 'display_top_footer_widget',
 ));
@@ -88,7 +103,7 @@ $wp_customize->add_control('display_top_footer_widget', array(
     $wp_customize->add_control('main_footer_top_padding', array(
         'type' => 'range',
         'section' => 'footer_settings',
-        'label' => __('Main Footer Top Padding', 'mytheme'),
+        'label' => __('Main Footer Top Padding', 'brenta'),
         'input_attrs' => array(
             'min' => 0,
             'max' => 100,
@@ -105,7 +120,7 @@ $wp_customize->add_control('display_top_footer_widget', array(
     $wp_customize->add_control('main_footer_bottom_padding', array(
         'type' => 'range',
         'section' => 'footer_settings',
-        'label' => __('Main Footer Bottom Padding', 'mytheme'),
+        'label' => __('Main Footer Bottom Padding', 'brenta'),
         'input_attrs' => array(
             'min' => 0,
             'max' => 100,
