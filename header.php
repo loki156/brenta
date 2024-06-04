@@ -36,22 +36,25 @@
     if ( function_exists( 'the_custom_logo' ) ) {
         the_custom_logo();
     }
-    if ( is_front_page() && is_home() ) :
     ?>
-    <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-    <?php
-    else :
-    ?>
-    <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-    <?php
-    endif;
-    $brenta_description = get_bloginfo( 'description', 'display' );
-    if ( $brenta_description || is_customize_preview() ) :
-    ?>
-    <p class="site-description"><?php echo $brenta_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-    <?php endif; ?>
+								 </div>
+  <?php
+$display_site_title_tagline = get_theme_mod('display_site_title_tagline', true);
+if ($display_site_title_tagline) : // Check if the site title and tagline should be displayed
+?>
+<div class="site-identity">
+    <span class="site-title" itemprop="name">
+        <a href="<?php echo esc_url(home_url('/')); ?>" rel="home" itemprop="url">
+            <?php echo get_bloginfo('name'); ?>
+        </a>
+    </span>
+    <p class="site-description" itemprop="description">
+        <?php echo get_bloginfo('description'); ?>
+    </p>
 </div>
-                        </div>
+<?php endif; ?>
+</div>
+                       
                     </div>
 
                     <div class="is--center">
